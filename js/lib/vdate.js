@@ -57,4 +57,10 @@ class VanaDate {
         this.vTimeToDate();
         return this;
     }
+    incrHours(hour) {
+        let t = this.vtime;
+        this.vtime += hour*60*60;
+        this.vTimeToDate();
+        return this;
+    }
 }
