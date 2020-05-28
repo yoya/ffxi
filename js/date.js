@@ -25,7 +25,18 @@ function vdateDateTime(vdate) {
     let day    = vdate.Day;
     month  = (month<10) ? "0"+month : ""+month;
     day    = (day <10)  ? "0"+day   : ""+day;
-    return year+"/"+month+"/"+day;
+    return year+"/"+month+"/"+day + " " + vdateTime(vdate);
+}
+
+
+function vdateTime(vdate) {
+    let hour   = vdate.Hour;
+    let minute = vdate.Minute;
+    let second = vdate.Second;
+    hour   = (hour<10)  ? "0"+hour  : ""+hour;
+    minute = (minute<10)? "0"+minute: ""+minute;
+    second = (second<10)? "0"+second: ""+second;
+    return hour+":"+minute+":"+second;
 }
 
 function edateDateTime(date) {
@@ -58,9 +69,13 @@ function main() {
         tr0.children[0].innerHTML = vdateWeek(vdate);
         tr0.children[1].innerHTML = vdateDateTime(vdate);
         tr1.children[0].innerHTML = edateDateTime(vdate.getEarthDate());
-        if ((i%8) < 7) {
-            table.style="float:left";
-        }
+        let vdate2 = new VanaDate(vdate);
+        vdate2.incrHours(6);
+        tr0.children[2].innerHTML = vdateTime(vdate2);
+        tr1.children[1].innerHTML = edateDateTime(vdate2.getEarthDate());
+        vdate2.incrHours(12);
+        tr0.children[3].innerHTML = vdateTime(vdate2);
+        tr1.children[2].innerHTML = edateDateTime(vdate2.getEarthDate());
         container.append(table)
         vdate.nextDay();
     }
