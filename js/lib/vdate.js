@@ -43,7 +43,7 @@ class VanaDate {
         return new Date(this.EarthTime());
     }
     EarthTime() {
-        return (this.vtime / 25) * 1000 + vanaEpocTime;
+        return Math.floor((this.vtime / 25) * 1000 + vanaEpocTime);
     }
     alignDay() {
         let t = this.vtime;
