@@ -8,11 +8,11 @@ function vdateWeekColor(vdate) {
     return ["#FDD",  // fire
             "#FFD",  // earth
             "#DEF",  // water
-            "#EFE",  // wind
+            "#DFD",  // wind
             "#EFF",  // ice
             "#FDF",  // thuner
             "#FFF",  // light
-            "#EDE",  // dark
+            "#DDE",  // dark
            ] [vdate.Week];
 }
 function vdateWeek(vdate) {
