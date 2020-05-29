@@ -34,6 +34,12 @@ class VanaDate {
     get Minute() { return this.minute;    }
     get Second() { return this.second;    }
     get WeekChar() { return weekCharTable[this.week]; }
+    get vNewYear() { return (this.month === 0) && (this.day === 1) && (this.hour === 0) && (this.minute === 0) && (this.second === 0); }
+    get vMidNight() { return (this.hour === 0) && (this.minute === 0) && (this.second === 0); }
+    get eMidNight() {
+        let edate = this.getEarthDate();
+        return (edate.getHours() === 0) && (edate.getMinutes() === 0) && (edate.getSeconds() === 0);
+    }
     toString() {
         return this.year+"/"+(this.month+1)+"/"+(this.day+1)+
             "("+weekCharTable[this.week]+") "+
