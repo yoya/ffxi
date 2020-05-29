@@ -32,20 +32,22 @@ function vdateWeek(vdate) {
     return vdate.WeekChar;
 }
 
-function vdateDateTime(vdate) {
+function vdateDate(vdate) {
     const year   = vdate.Year;
     let month  = vdate.Month;
     let day    = vdate.Day;
+    let week   = vdateWeek(vdate);
     month  = (month<10) ? "0"+month : ""+month;
     day    = (day <10)  ? "0"+day   : ""+day;
-    return year+"/"+month+"/"+day + " " + vdateTime(vdate);
+    return "("+week+")"+year+"/"+month+"/"+day;
 }
-function vdateDateTime2(vdate) {
+function vdateDate2(vdate) {
     let month  = vdate.Month;
     let day    = vdate.Day;
+    let week   = vdateWeek(vdate);
     month  = (month<10) ? "0"+month : ""+month;
     day    = (day <10)  ? "0"+day   : ""+day;
-    return month+"/"+day + " " + vdateTime(vdate);
+    return "("+week+")"+month+"/"+day;
 }
 
 
@@ -65,18 +67,14 @@ function edateTime(date) {
     return hours+":"+minutes;
 }
 
-function edateDateTime(date) {
+function edateDate(date) {
     const year  = date.getFullYear();
     let month = date.getMonth() + 1;
     let day   = date.getDate();
-    let hours   = date.getHours();
-    let minutes = date.getMinutes();
     let week = "日月火水木金土"[date.getDay()];
     month   = (month<10)  ? "0"+month  : ""+month;
     day     = (day <10)   ? "0"+day    : ""+day;
-    hours   = (hours<10)  ? "0"+hours  : ""+hours;
-    minutes = (minutes<10)? "0"+minutes: ""+minutes;
-    return year+"/"+month+"/"+day+"("+week+") "+hours+":"+minutes;
+    return year+"/"+month+"/"+day+"("+week+")";
 }
 
 function main() {
@@ -94,22 +92,28 @@ function main() {
         let table = template.cloneNode(true);
         let tbody = table.children[0];
         let [tr0, tr1] = tbody.children;
-        tr0.children[0].innerHTML = vdateWeek(vdate);
-        tr0.children[1].innerHTML = vNewYear? vdateDateTime(vdate): (vdate.vMidNight? vdateDateTime2(vdate): vdateTime(vdate));
-        tr1.children[0].innerHTML = edayGroupHead? edateDateTime(edate): edateTime(edate);
         tr0.style.backgroundColor = vdateWeekColor(vdate);
         tr1.style.backgroundColor = edateWeekColor(edate);
-
-        tr1.children[0].style = "text-align:right";
+        //
+        if (vNewYear) {
+            tr0.children[0].innerHTML = vdateDate(vdate);
+        } else {
+            tr0.children[0].innerHTML = vdateDate2(vdate);
+        }
+        if (edayGroupHead) {
+            tr1.children[0].innerHTML = edateDate(edate);
+        }
+        tr0.children[1].innerHTML = vdateTime(vdate);
+        tr1.children[1].innerHTML = edateTime(edate);
         let vdate2 = new VanaDate(vdate);
         vdate2.incrHours(6);
         let edate2 = vdate2.getEarthDate();
         tr0.children[2].innerHTML = vdateTime(vdate2);
-        tr1.children[1].innerHTML = edateTime(edate2);
+        tr1.children[2].innerHTML = edateTime(edate2);
         vdate2.incrHours(12);
         edate2 = vdate2.getEarthDate();
         tr0.children[3].innerHTML = vdateTime(vdate2);
-        tr1.children[2].innerHTML = edateTime(edate2);
+        tr1.children[3].innerHTML = edateTime(edate2);
         //
         vdate.nextDay();
         edate = vdate.getEarthDate();
