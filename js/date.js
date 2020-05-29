@@ -32,11 +32,9 @@ function vdateDateTime(vdate) {
 function vdateTime(vdate) {
     let hour   = vdate.Hour;
     let minute = vdate.Minute;
-    let second = vdate.Second;
     hour   = (hour<10)  ? "0"+hour  : ""+hour;
     minute = (minute<10)? "0"+minute: ""+minute;
-    second = (second<10)? "0"+second: ""+second;
-    return hour+":"+minute+":"+second;
+    return hour+":"+minute
 }
 
 function edateDateTime(date) {
@@ -45,12 +43,11 @@ function edateDateTime(date) {
     let day   = date.getDate();
     let hours   = date.getHours();
     let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
     month   = (month<10)  ? "0"+month  : ""+month;
     day     = (day <10)   ? "0"+day    : ""+day;
     hours   = (hours<10)  ? "0"+hours  : ""+hours;
     minutes = (minutes<10)? "0"+minutes: ""+minutes;
-    return year+"/"+month+"/"+day+" "+hours+":"+minutes+":"+seconds;
+    return year+"/"+month+"/"+day+" "+hours+":"+minutes;
 }
 
 function main() {
