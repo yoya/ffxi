@@ -138,4 +138,17 @@ function main() {
         }
         vNewYear = vdate.vNewYear;
     }
+    tickTime();
+    setInterval(tickTime, 1000*25 / 60);
+}
+
+function tickTime() {
+    const vanaTime = document.getElementById("vanaTime");
+    const earthTime = document.getElementById("earthTime");
+    const edate = new Date();
+    const vdate = new VanaDate(edate);
+    vanaTime.innerHTML = vdateDate(vdate) + " " + vdateTime(vdate);
+    earthTime.innerHTML = edateDate(edate) + " " + edateTime(edate);
+    vanaTime.parentNode.style.backgroundColor = vdateWeekColor(vdate);
+    earthTime.parentNode.style.backgroundColor = edateWeekColor(edate);
 }
