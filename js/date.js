@@ -195,10 +195,10 @@ function tickTime() {
     const eid = edateID(edate2);
     const td0 = document.getElementById(vid);
     const td1 = document.getElementById(eid)
-    if (td0 !== undefined) {
+    if (td0 !== null) {
         td0.style = "color:red";
     }
-    if (td1 !== undefined) {
+    if (td1 !== null) {
         td1.style = "color:red";
     }
 }
