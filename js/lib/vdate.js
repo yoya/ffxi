@@ -63,8 +63,20 @@ class VanaDate {
         this.vTimeToDate();
         return this;
     }
+    alignZoneTime() {
+        let t2 = this.vtime % (24*60*60);
+        if (t2 < (6*60*60)) {
+            ;
+        } else if (t2 < (16*60*60)) {
+            t2 -= 6*60*60;
+        } else {
+            t2 -= 18*60*60;
+        }
+        this.vtime -= t2;
+        this.vTimeToDate();
+        return this;
+    }
     incrHours(hour) {
-        let t = this.vtime;
         this.vtime += hour*60*60;
         this.vTimeToDate();
         return this;
