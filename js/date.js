@@ -40,6 +40,34 @@ function vdateWeek(vdate) {
     return vdate.WeekChar;
 }
 
+function vdateID(vdate) {
+    const year = vdate.Year;
+    let month  = vdate.Month;
+    let day    = vdate.Day;
+    let hour   = vdate.Hour;
+    let minute = vdate.Minute;
+    month  = digit0pad(month, 2);
+    day    = digit0pad(day, 2);
+    hour   = digit0pad(hour, 2);
+    minute = digit0pad(minute, 2);
+    return "d"+year+month+day+hour+minute;
+}
+
+function edateID(date) {
+    const year  = date.getFullYear();
+    let month   = date.getMonth() + 1;
+    let day     = date.getDate();
+    let hours   = date.getHours();
+    let minutes = date.getMinutes();
+    month   = digit0pad(month, 2);
+    day     = digit0pad(day, 2);
+    hours   = digit0pad(hours, 2);
+    minutes = digit0pad(minutes, 2);
+    hours   = digit0pad(hours, 2);
+    minutes = digit0pad(minutes, 2);
+    return "d"+year+month+day+hours+minutes;
+}
+
 function vdateDate(vdate) {
     const year   = vdate.Year;
     let month  = vdate.Month;
@@ -96,10 +124,12 @@ function main() {
     let edate = vdate.getEarthDate();
     let edayGroupHead = true;
     let vNewYear = true;
+    //
     for (let i = 0 ; i < 8*5 ; i++) {
         let table = template.cloneNode(true);
         let tbody = table.children[0];
         let [tr0, tr1] = tbody.children;
+        let [td0, td1] = [tr0.children, tr1.children];
         tr0.style.backgroundColor = vdateWeekColor(vdate);
         tr1.style.backgroundColor = edateWeekColor(edate);
         //
@@ -111,17 +141,25 @@ function main() {
         if (edayGroupHead) {
             tr1.children[0].innerHTML = edateDate(edate);
         }
-        tr0.children[1].innerHTML = vdateTime(vdate);
-        tr1.children[1].innerHTML = edateTime(edate);
+        td0[1].innerHTML = vdateTime(vdate);
+        td1[1].innerHTML = edateTime(edate);
+        td0[1].setAttribute('id', vdateID(vdate));
+        td1[1].setAttribute('id', edateID(edate));
+        //
         let vdate2 = new VanaDate(vdate);
         vdate2.incrHours(6);
         let edate2 = vdate2.getEarthDate();
-        tr0.children[2].innerHTML = vdateTime(vdate2);
-        tr1.children[2].innerHTML = edateTime(edate2);
+        td0[2].innerHTML = vdateTime(vdate2);
+        td1[2].innerHTML = edateTime(edate2);
+        td0[2].setAttribute('id', vdateID(vdate2));
+        td1[2].setAttribute('id', edateID(edate2));
+        //
         vdate2.incrHours(12);
         edate2 = vdate2.getEarthDate();
-        tr0.children[3].innerHTML = vdateTime(vdate2);
-        tr1.children[3].innerHTML = edateTime(edate2);
+        td0[3].innerHTML = vdateTime(vdate2);
+        td1[3].innerHTML = edateTime(edate2);
+        td0[3].setAttribute('id', vdateID(vdate2));
+        td1[3].setAttribute('id', edateID(edate2));
         //
         vdate.nextDay();
         edate = vdate.getEarthDate();
@@ -151,4 +189,16 @@ function tickTime() {
     earthTime.innerHTML = edateDate(edate) + " " + edateTime(edate);
     vanaTime.parentNode.style.backgroundColor = vdateWeekColor(vdate);
     earthTime.parentNode.style.backgroundColor = edateWeekColor(edate);
+    const vdate2 = new VanaDate(vdate).alignZoneTime();
+    const edate2 = vdate2.getEarthDate();
+    const vid = vdateID(vdate2);
+    const eid = edateID(edate2);
+    const td0 = document.getElementById(vid);
+    const td1 = document.getElementById(eid)
+    if (td0 !== undefined) {
+        td0.style = "color:red";
+    }
+    if (td1 !== undefined) {
+        td1.style = "color:red";
+    }
 }
