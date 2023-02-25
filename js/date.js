@@ -116,7 +116,6 @@ function edateDate(date) {
 }
 
 function main() {
-    console.log("main");
     const container = document.getElementById("container");
     const template = document.getElementById("template");
     template.remove();
@@ -225,7 +224,6 @@ function onClickMidnight(e) {
 displayMidnight(midnightCheckbox.checked);
 
 function displayMidnight(checked) {
-    console.debug("displayMidnight", { checked });
     const selectors = ".midnight";
     const midnightAll = document.querySelectorAll(selectors);
     midnightAll.forEach((midnight) => {
