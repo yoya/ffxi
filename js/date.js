@@ -224,7 +224,7 @@ function onClickMidnight(e) {
 displayMidnight(midnightCheckbox.checked);
 
 function displayMidnight(checked) {
-    const selectors = ".midnight";
+    const selectors = ".md_slot";
     const midnightAll = document.querySelectorAll(selectors);
     midnightAll.forEach((midnight) => {
         if (checked) {
