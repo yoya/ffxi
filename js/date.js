@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     main();
 });
 
+// Vana'diel Time Week Color
 function vdateWeekColor(vdate) {
     return ["#FDD",  // fire
             "#FFD",  // earth
@@ -16,6 +17,7 @@ function vdateWeekColor(vdate) {
            ] [vdate.Week];
 }
 
+// Earth Time Week Color
 function edateWeekColor(edate) {
     return ["#FED",  // sun
             "#FFD",  // mon
@@ -23,7 +25,7 @@ function edateWeekColor(edate) {
             "#DEF",  // wed
             "#DEE",  // thu
             "#FFD",  // fri
-            "#EDD",  // sat
+            "#FEE",  // sat 
            ] [edate.getDay()];
 }
 
@@ -147,19 +149,33 @@ function main() {
         td1[1].setAttribute('id', edateID(edate));
         //
         let vdate2 = new VanaDate(vdate);
-        vdate2.incrHours(6);
+        //
+        vdate2.incrHours(4);
         let edate2 = vdate2.getEarthDate();
         td0[2].innerHTML = vdateTime(vdate2);
         td1[2].innerHTML = edateTime(edate2);
         td0[2].setAttribute('id', vdateID(vdate2));
         td1[2].setAttribute('id', edateID(edate2));
         //
-        vdate2.incrHours(12);
-        edate2 = vdate2.getEarthDate();
+        vdate2.incrHours(2);
         td0[3].innerHTML = vdateTime(vdate2);
         td1[3].innerHTML = edateTime(edate2);
         td0[3].setAttribute('id', vdateID(vdate2));
         td1[3].setAttribute('id', edateID(edate2));
+        //
+        vdate2.incrHours(12);
+        edate2 = vdate2.getEarthDate();
+        td0[4].innerHTML = vdateTime(vdate2);
+        td1[4].innerHTML = edateTime(edate2);
+        td0[4].setAttribute('id', vdateID(vdate2));
+        td1[4].setAttribute('id', edateID(edate2));
+        //
+        vdate2.incrHours(2);
+        edate2 = vdate2.getEarthDate();
+        td0[5].innerHTML = vdateTime(vdate2);
+        td1[5].innerHTML = edateTime(edate2);
+        td0[5].setAttribute('id', vdateID(vdate2));
+        td1[5].setAttribute('id', edateID(edate2));
         //
         vdate.nextDay();
         edate = vdate.getEarthDate();
@@ -201,4 +217,22 @@ function tickTime() {
     if (td1 !== null) {
         td1.style = "color:red";
     }
+}
+
+function onClickMidnight(e) {
+    displayMidnight(e.checked);
+}
+displayMidnight(midnightCheckbox.checked);
+
+function displayMidnight(checked) {
+    console.debug("displayMidnight", { checked });
+    const selectors = ".midnight";
+    const midnightAll = document.querySelectorAll(selectors);
+    midnightAll.forEach((midnight) => {
+        if (checked) {
+            midnight.style.display = "";
+        } else {
+            midnight.style.display = "none";
+        }
+    });
 }

@@ -10,24 +10,40 @@
     body {
         background-color:#AAA;
     }
+    .day {
+        background-color:#FFFA;
+    }
+    .night {
+        background-color:#AAF1;
+    }
+    .midnight {
+        background-color:#2281;
+    }
   </style>
   <body>
     <div id="container">
-      <table id="current">
-        <tr> <td id="vanaTime"> </td> </tr>
-        <tr> <td id="earthTime"> </td> </tr>
-      </table>
+      <div  style="display:flex">
+        <table id="current">
+          <tr> <td id="vanaTime"> </td> </tr>
+          <tr> <td id="earthTime"> </td> </tr>
+        </table>
+        <div>
+          midnight: <input type="checkbox" id="midnightCheckbox" onclick="onClickMidnight(this)">
+        </div>
+      </div>
       <hr />
-      <table id="template">
-        <tbody>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td>
-          </tr>
-        </tbody>
-      </table>
+      <div>
+        <table id="template">
+          <tbody>
+            <tr>
+              <td></td> <td class="midnight"></td> <td class="night"></td> <td class="day"></td> <td class="night"></td> <td class="midnight"></td>
+            </tr>
+            <tr>
+              <td></td> <td class="midnight"></td> <td class="night"></td> <td class="day"></td> <td class="night"></td> <td class="midnight"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <script type="text/javascript" src="lib/vdate.js"> </script>
     <script type="text/javascript" src="date.js"> </script>
